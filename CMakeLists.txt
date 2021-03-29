@@ -13,6 +13,10 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_ros
 )
 
+find_package(gazebo REQUIRED)
+
+link_directories(${GAZEBO_LIBRARY_DIRS})
+
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES gazebo-plugin-amcl-pose
@@ -23,4 +27,9 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+  ${GAZEBO_INCLUDE_DIRS}
 )
+
+add_library(amclPosePlugin SHARED src/plugin_amcl_pose.cpp)
+target_link_libraries(amclPosePlugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
