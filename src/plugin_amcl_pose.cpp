@@ -10,6 +10,16 @@ namespace gazebo
 
     plugin_amcl_pose::~plugin_amcl_pose()
     {
+        // Disable callback queue
+        amcl_pose_queue_.clear();
+        amcl_pose_queue_.disable();
+
+        // Shutdown ROS node handle
+        amcl_pose_nh_.shutdown();
+
+        // Wait for child thread to join
+        if(thread_ptr_->joinable())
+            thread_ptr_->join();
     }
 
     void plugin_amcl_pose::Load(
