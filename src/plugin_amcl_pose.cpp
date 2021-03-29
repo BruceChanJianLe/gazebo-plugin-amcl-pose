@@ -96,20 +96,22 @@ namespace gazebo
             msg_.pose.pose.orientation.y = read_transformation_.transform.rotation.y;
             msg_.pose.pose.orientation.z = read_transformation_.transform.rotation.z;
             msg_.pose.pose.orientation.w = read_transformation_.transform.rotation.w;
-        }
-        catch(const tf2::TransformException & e)
-        {
-            ROS_ERROR_STREAM(
-                ros::this_node::getName() << " " << __func__ <<
-                " transform exception: " << e.what()
-            );
-            return isok;
+
+            isok = true;
         }
         catch(const tf2::TimeoutException & e)
         {
             ROS_ERROR_STREAM(
                 ros::this_node::getName() << " " << __func__ <<
                 " timeout exception: " << e.what()
+            );
+            return isok;
+        }
+        catch(const tf2::TransformException & e)
+        {
+            ROS_ERROR_STREAM(
+                ros::this_node::getName() << " " << __func__ <<
+                " transform exception: " << e.what()
             );
             return isok;
         }
