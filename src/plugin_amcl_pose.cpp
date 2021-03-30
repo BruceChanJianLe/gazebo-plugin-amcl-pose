@@ -84,6 +84,11 @@ namespace gazebo
             }
         );
 
+        // Notify plugin status
+        ROS_INFO_STREAM(
+            ros::this_node::getName() << " plugin amcl pose successfully loaded."
+        );
+
     }
 
 
