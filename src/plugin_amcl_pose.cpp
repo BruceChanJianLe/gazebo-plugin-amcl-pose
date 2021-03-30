@@ -1,5 +1,6 @@
 #include "gazebo-plugin-amcl-pose/plugin_amcl_pose.hpp"
 
+GZ_REGISTER_MODEL_PLUGIN(gazebo::plugin_amcl_pose);
 
 namespace gazebo
 {
