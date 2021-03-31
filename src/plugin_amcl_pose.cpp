@@ -31,7 +31,7 @@ namespace gazebo
         // Obtain parameters from xacro file
         if(_sdf->HasElement("topicRate"))
         {
-            rate_ = _sdf->GetElement("topiceRate")->Get<double>();
+            rate_ = _sdf->GetElement("topicRate")->Get<double>();
         }
         else
         {
