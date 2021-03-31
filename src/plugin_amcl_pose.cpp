@@ -99,7 +99,6 @@ namespace gazebo
 
         try
         {
-            ROS_INFO_STREAM("fixed frame: " << fixed_frame_ << " robot frame: " << robot_frame_);
             if(tfBuffer_.canTransform(fixed_frame_, robot_frame_, ros::Time(0)))
             {
                 read_transformation_ = tfBuffer_.lookupTransform(fixed_frame_, robot_frame_, ros::Time(0), ros::Duration(60.0));
