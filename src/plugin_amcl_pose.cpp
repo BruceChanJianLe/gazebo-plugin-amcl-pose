@@ -49,11 +49,11 @@ namespace gazebo
 
         if(_sdf->HasElement("robotFrame"))
         {
-            fixed_frame_ = _sdf->GetElement("robotFrame")->Get<std::string>();
+            robot_frame_ = _sdf->GetElement("robotFrame")->Get<std::string>();
         }
         else
         {
-            fixed_frame_ = "base_link";
+            robot_frame_ = "base_link";
         }
 
         // Ensure that ROS node for Gazebo has been initialized
