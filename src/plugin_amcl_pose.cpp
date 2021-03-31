@@ -100,20 +100,22 @@ namespace gazebo
         try
         {
             ROS_INFO_STREAM("fixed frame: " << fixed_frame_ << " robot frame: " << robot_frame_);
-            read_transformation_ = tfBuffer_.lookupTransform(fixed_frame_, robot_frame_, ros::Time(0), ros::Duration(60.0));
+            if(tfBuffer_.canTransform(fixed_frame_, robot_frame_, ros::Time(0)))
+            {
+                read_transformation_ = tfBuffer_.lookupTransform(fixed_frame_, robot_frame_, ros::Time(0), ros::Duration(60.0));
 
-            msg_.header.frame_id = fixed_frame_;
-            msg_.header.stamp = ros::Time::now();
+                msg_.header.frame_id = fixed_frame_;
+                msg_.header.stamp = ros::Time::now();
 
-            msg_.pose.pose.position.x = read_transformation_.transform.translation.x;
-            msg_.pose.pose.position.y = read_transformation_.transform.translation.y;
-            msg_.pose.pose.position.z = read_transformation_.transform.translation.z;
+                msg_.pose.pose.position.x = read_transformation_.transform.translation.x;
+                msg_.pose.pose.position.y = read_transformation_.transform.translation.y;
+                msg_.pose.pose.position.z = read_transformation_.transform.translation.z;
 
-            msg_.pose.pose.orientation.x = read_transformation_.transform.rotation.x;
-            msg_.pose.pose.orientation.y = read_transformation_.transform.rotation.y;
-            msg_.pose.pose.orientation.z = read_transformation_.transform.rotation.z;
-            msg_.pose.pose.orientation.w = read_transformation_.transform.rotation.w;
-
+                msg_.pose.pose.orientation.x = read_transformation_.transform.rotation.x;
+                msg_.pose.pose.orientation.y = read_transformation_.transform.rotation.y;
+                msg_.pose.pose.orientation.z = read_transformation_.transform.rotation.z;
+                msg_.pose.pose.orientation.w = read_transformation_.transform.rotation.w;
+            }
             isok = true;
         }
         catch(const tf2::TimeoutException & e)
