@@ -2,6 +2,8 @@
 
 This plugin simulates ROS amcl packages where it is able to publish `/amcl_pose`. Next step is to be able to set the `/initialpose` of the robot through RViz.
 
+Please note that currently the initialpose function is still under development.
+
 ## Reference
 
 - http://wiki.ros.org/amcl  
